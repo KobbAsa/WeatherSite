@@ -3,3 +3,13 @@
     top: 50px;
     left: 50px;
 }
+.search {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.search-bar{
+    width: 500px;
+    height: 35px;
+}
