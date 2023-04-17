@@ -4,5 +4,5 @@ window.onload = function () {
     const date = today.toLocaleDateString();
     const time = today.toLocaleTimeString();
 
-    document.getElementById('date-time').innerHTML = `Date: ${date} Time: ${time}`;
+    document.getElementById('date-time').innerHTML = `Date: ${date} <br> Time: ${time}`;
 }
