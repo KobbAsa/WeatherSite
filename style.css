@@ -3,17 +3,20 @@
     top: 50px;
     left: 50px;
 }
+
 .search {
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .search-bar{
     width: 500px;
     height: 35px;
     text-align: center;
 }
+
 .weather-info-block{
     position: absolute;
     left: 50px;
@@ -23,9 +26,26 @@
     color: black;
     font-size: 18px;
 }
+
 .weather-item{
     margin-bottom: 5px;
 }
+
 .weather-value{
     font-weight: bold;
+}
+
+.seven-day-forecast{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 60px;
+}
+
+.day-forecast{
+    width: calc(100% / 7 - 20px);
+    margin-left: 20px;
+    text-align: center;
 }
