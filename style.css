@@ -5,11 +5,27 @@
 }
 .search {
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 .search-bar{
     width: 500px;
     height: 35px;
+    text-align: center;
+}
+.weather-info-block{
+    position: absolute;
+    left: 50px;
+    top: 150px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 18px;
+}
+.weather-item{
+    margin-bottom: 5px;
+}
+.weather-value{
+    font-weight: bold;
 }
