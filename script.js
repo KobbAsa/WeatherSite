@@ -11,10 +11,13 @@ async function getWeatherData(){
     return data;
 }
 
-getWeatherData().then((data) => console.log(data));
+getWeatherData().then(data => {
+    console.log(data)
+    currentCityName.textContent = data.city.name;
+    currentTemperature.textContent = Math.round(data.list[0].main.temp) + '°C';
+    description.textContent = data.list[0].weather[0].description;
+}).catch(error => console.log(error));
 
-
-window.onload = function () {
     function updateDateTime() {
         const today = new Date();
         const date = today.toLocaleDateString();
@@ -24,4 +27,3 @@ window.onload = function () {
 
     updateDateTime();
     setInterval(updateDateTime, 1000);
-}
