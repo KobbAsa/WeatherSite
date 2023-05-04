@@ -1,5 +1,9 @@
-const apiKey = "143a2fc2324eda5597969126343ac407";
+const apiKey = '143a2fc2324eda5597969126343ac407';
 const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Kyiv&units=metric&appid=${apiKey}`;
+
+const currentCityName = document.querySelector('.current-city-name');
+const currentTemperature = document.querySelector('.current-temperature');
+const description = document.querySelector('.description');
 
 async function getWeatherData(){
     const response = await fetch(apiUrl);
