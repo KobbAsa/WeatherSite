@@ -1,4 +1,5 @@
 const apiKey = '143a2fc2324eda5597969126343ac407';
+let city = 'Kyiv';
 const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
 
 const currentCityName = document.querySelector('.current-city-name');
@@ -19,6 +20,13 @@ getWeatherData().then(data => {
     currentTemperature.textContent = Math.round(data.list[0].main.temp) + '°C';
     description.textContent = data.list[0].weather[0].description;
 }).catch(error => console.log(error));
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchButton = document.getElementById('search-btn');
+    searchButton.addEventListener('click', () => {
+        console.log('button works properly')
+    });
+});
 
 function updateDateTime() {
     const today = new Date();
