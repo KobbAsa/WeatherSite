@@ -20,7 +20,10 @@ function updateWeatherData(city) {
         currentCityName.textContent = data.city.name;
         currentTemperature.textContent = Math.round(data.list[0].main.temp) + '°C';
         description.textContent = data.list[0].weather[0].description;
-    }).catch(error => console.log(error));
+    }).catch(error => {
+        console.log(error);
+        alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
+    });
 }
 
 updateWeatherData(city);
