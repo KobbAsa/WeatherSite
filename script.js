@@ -29,6 +29,8 @@ function updateWeatherData(city) {
         wind.textContent = data.list[0].wind.speed + ' m/s';
         humidity.textContent = data.list[0].main.humidity + ' %';
         pressure.textContent = data.list[0].main.pressure + ' hPa';
+        sunrise.textContent = new Date(data.city.sunrise * 1000 + data.city.timezone * 1000).toLocaleTimeString();
+        sunset.textContent = new Date(data.city.sunset * 1000 + data.city.timezone * 1000).toLocaleTimeString();
     }).catch(error => {
         console.log(error);
         alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
