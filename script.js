@@ -1,12 +1,18 @@
 const apiKey = '143a2fc2324eda5597969126343ac407';
 let city = 'Kyiv';
-
+// basic search
 const currentCityName = document.querySelector('.current-city-name');
 const currentTemperature = document.querySelector('.current-temperature');
 const description = document.querySelector('.description');
 const searchBar = document.querySelector('.search-bar');
 const searchButton = document.getElementById('search-btn');
 
+// current info block
+const wind = document.querySelector('.weather-value-wind');
+const humidity = document.querySelector('.weather-value-humidity');
+const pressure = document.querySelector('.weather-value-pressure');
+const sunrise = document.querySelector('.weather-value-sunrise');
+const sunset = document.querySelector('.weather-value-sunset');
 async function getWeatherData(city){
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
     const response = await fetch(apiUrl);
@@ -20,6 +26,9 @@ function updateWeatherData(city) {
         currentCityName.textContent = data.city.name;
         currentTemperature.textContent = Math.round(data.list[0].main.temp) + '°C';
         description.textContent = data.list[0].weather[0].description;
+        wind.textContent = data.list[0].wind.speed + ' m/s';
+        humidity.textContent = data.list[0].main.humidity + ' %';
+        pressure.textContent = data.list[0].main.pressure + ' hPa';
     }).catch(error => {
         console.log(error);
         alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
