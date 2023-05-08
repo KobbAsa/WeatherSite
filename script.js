@@ -13,9 +13,23 @@ const humidity = document.querySelector('.weather-value-humidity');
 const pressure = document.querySelector('.weather-value-pressure');
 const sunrise = document.querySelector('.weather-value-sunrise');
 const sunset = document.querySelector('.weather-value-sunset');
+
+function updateDateTime() {
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+    document.getElementById('date-time').innerHTML = `Date: ${date} <br> Time: ${time}`;
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
 async function getWeatherData(city){
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
     const response = await fetch(apiUrl);
+    if(!response.ok){
+        throw new Error(`HTTP error! ${response.status}`)
+    }
     const data = await response.json();
     return data;
 }
@@ -42,17 +56,6 @@ updateWeatherData(city);
 searchButton.addEventListener('click', () => {
     const updatedCity = searchBar.value.trim();
     if(updatedCity !== ``){
-        city = updatedCity;
-        updateWeatherData(city);
+        updateWeatherData(updatedCity);
     }
 });
-
-function updateDateTime() {
-    const today = new Date();
-    const date = today.toLocaleDateString();
-    const time = today.toLocaleTimeString();
-    document.getElementById('date-time').innerHTML = `Date: ${date} <br> Time: ${time}`;
-}
-
-updateDateTime();
-setInterval(updateDateTime, 1000);
