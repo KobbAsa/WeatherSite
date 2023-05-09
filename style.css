@@ -38,15 +38,15 @@
 .seven-day-forecast{
     position: absolute;
     bottom: 0;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     justify-content: space-between;
     margin-left: 60px;
 }
 
 .day-forecast{
-    width: calc(100% / 7 - 20px);
-    margin-left: 20px;
+    width: calc(100% / 5 - 20px);
+    margin-left: 100px;
     text-align: center;
 }
 
@@ -64,7 +64,6 @@
     font-size: 3rem;
     margin: 0;
 }
-
 
 .current-weather-info{
     display: flex;
