@@ -14,6 +14,9 @@ const pressure = document.querySelector('.weather-value-pressure');
 const sunrise = document.querySelector('.weather-value-sunrise');
 const sunset = document.querySelector('.weather-value-sunset');
 
+// five-day forecast block
+const forecastDates = document.querySelectorAll('.weather-date');
+const forecastTemp = document.querySelectorAll('.weather-temperature');
 function updateDateTime() {
     const today = new Date();
     const date = today.toLocaleDateString();
@@ -56,6 +59,21 @@ updateCurrentWeather(city);
 searchButton.addEventListener('click', () => {
     const updatedCity = searchBar.value.trim();
     if(updatedCity !== ``){
-        updateWeatherData(updatedCity);
+        updateCurrentWeather(updatedCity);
+        updateForecast(updatedCity);
     }
 });
+
+function updateForecast(city) {
+    getWeatherData(city).then(data => {
+        const filteredData = data.list.filter(item => item.dt_txt.includes('12:00:00'));
+        console.log(filteredData);
+        filteredData.forEach((item, index) =>{
+            const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
+            forecastDates[index].textContent = forecastDate;
+            forecastTemp[index].textContent = Math.round(item.main.temp) + '°C';
+        })
+    })
+}
+
+updateForecast(city);
