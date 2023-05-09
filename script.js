@@ -34,7 +34,7 @@ async function getWeatherData(city){
     return data;
 }
 
-function updateWeatherData(city) {
+function updateCurrentWeather(city) {
     getWeatherData(city).then(data => {
         console.log(data)
         currentCityName.textContent = data.city.name;
@@ -51,7 +51,7 @@ function updateWeatherData(city) {
     });
 }
 
-updateWeatherData(city);
+updateCurrentWeather(city);
 
 searchButton.addEventListener('click', () => {
     const updatedCity = searchBar.value.trim();
