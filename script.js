@@ -71,11 +71,13 @@ function updateForecast(city) {
 
         const now = new Date();
         const currentHour = now.getHours();
+        let startIndex = 0;
+
         if(currentHour < 12) {
-            let startIndex = 1
+            startIndex = 1
         }
 
-        filteredData.forEach((item, index) =>{
+        filteredData.slice(startIndex).forEach((item, index) =>{
             const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
             forecastDates[index].textContent = forecastDate;
             forecastTemp[index].textContent = Math.round(item.main.temp) + '°C';
