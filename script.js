@@ -68,6 +68,13 @@ function updateForecast(city) {
     getWeatherData(city).then(data => {
         const filteredData = data.list.filter(item => item.dt_txt.includes('12:00:00'));
         console.log(filteredData);
+
+        const now = new Date();
+        const currentHour = now.getHours();
+        if(currentHour < 12) {
+            let startIndex = 1
+        }
+
         filteredData.forEach((item, index) =>{
             const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
             forecastDates[index].textContent = forecastDate;
