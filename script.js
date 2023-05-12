@@ -77,12 +77,13 @@ function updateForecast(city) {
 
         if(currentHour < 15) {
             startIndex = 1
-            lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
+            lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString()+ ` (${data.list[39].dt_txt.split(' ')[1]})`;
             lastForecastTemp.textContent = Math.round(data.list[39].main.temp) + '°C';
         }
-
-        lastForecastDate.textContent = new Date(filteredData[4].dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
-        lastForecastTemp.textContent = Math.round(filteredData[4].main.temp) + '°C';
+        else {
+            lastForecastDate.textContent = new Date(filteredData[4].dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
+            lastForecastTemp.textContent = Math.round(filteredData[4].main.temp) + '°C';
+        }
 
         filteredData.slice(startIndex).forEach((item, index) =>{
             const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
