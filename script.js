@@ -37,7 +37,7 @@ timeFormatBtn.addEventListener('click', () => {
 })
 function updateDateTime() {
     const today = new Date();
-    let hours = today.getHours();
+    let hours = today.getHours() - 3;
     let minutes = today.getMinutes();
     let seconds = today.getSeconds();
 
@@ -50,9 +50,9 @@ function updateDateTime() {
     if (hours === 0){
         hours = 12;
     }
-        timeFormatDisplay.textContent = `Time: ${hours}:${minutes}:${seconds} ${midday}`;
+        timeFormatDisplay.textContent = `Time: ${hours}:${addZeros(minutes)}:${addZeros(seconds)} ${midday}`;
     } else {
-        timeFormatDisplay.textContent = `Time: ${hours}:${minutes}:${seconds}`
+        timeFormatDisplay.textContent = `Time: ${addZeros(hours)}:${addZeros(minutes)}:${addZeros(seconds)}`
     }
 
     const date = today.toLocaleDateString();
@@ -61,6 +61,10 @@ function updateDateTime() {
 
 updateDateTime();
 setInterval(updateDateTime, 1000);
+
+function addZeros(value){
+    return value.toString().padStart(2, '0');
+}
 
 async function getWeatherData(city){
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
