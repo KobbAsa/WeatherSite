@@ -17,8 +17,12 @@ const sunset = document.querySelector('.weather-value-sunset');
 // five-day forecast block
 const forecastDates = document.querySelectorAll('.weather-date');
 const forecastTemp = document.querySelectorAll('.weather-temperature');
-const lastForecastDate = document.querySelector('.last-weather-date')
+const lastForecastDate = document.querySelector('.last-weather-date');
 const lastForecastTemp = document.querySelector('.last-weather-temperature');
+
+// for change format button
+const timeFormatBtn = document.getElementById('time-format-btn');
+const timeFormatDisplay = document.getElementById('date-time');
 function updateDateTime() {
     const today = new Date();
     const date = today.toLocaleDateString();
