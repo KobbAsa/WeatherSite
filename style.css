@@ -82,3 +82,11 @@
     font-size: 1rem;
     margin: 0;
 }
+
+.time-format-btn {
+    position: relative;
+    top: 100px;
+    left: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
