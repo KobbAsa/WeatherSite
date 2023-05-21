@@ -26,18 +26,13 @@ const timeFormatDisplay = document.getElementById('date-time');
 
 let timeFormat = '24h';
 
-timeFormatBtn.addEventListener('click', () => {
-    if(timeFormat === '24h'){
-        timeFormat = '12h';
-    } else {
-        timeFormat = '24h';
-    }
+function toggleTimeFormat(){
+    timeFormat = timeFormat === '24h' ? '12h' : '24h';
+}
 
-    updateDateTime()
-})
 function updateDateTime() {
     const today = new Date();
-    let hours = today.getHours() - 3;
+    let hours = today.getHours() + 4;
     let minutes = today.getMinutes();
     let seconds = today.getSeconds();
 
@@ -61,6 +56,8 @@ function updateDateTime() {
 
 updateDateTime();
 setInterval(updateDateTime, 1000);
+
+timeFormatBtn.addEventListener('click', toggleTimeFormat);
 
 function addZeros(value){
     return value.toString().padStart(2, '0');
