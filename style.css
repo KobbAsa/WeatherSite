@@ -9,6 +9,7 @@
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 
 .search-bar{
@@ -84,6 +85,13 @@
 }
 
 .time-format-btn {
+    position: relative;
+    top: 100px;
+    left: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.date-format-btn {
     position: relative;
     top: 100px;
     left: 40px;
