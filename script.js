@@ -30,10 +30,12 @@ let dateFormat = 'en-GB';
 
 function toggleTimeFormat(){
     timeFormat = timeFormat === '24h' ? '12h' : '24h';
+    updateDateTime();
 }
 function toggleDateFormat(){
     dateFormat = dateFormat === 'en-GB' ? 'en-US' : 'en-GB';
     updateDateTime();
+    updateForecast(city);
 }
 
 function updateDateTime() {
@@ -118,16 +120,16 @@ function updateForecast(city) {
 
         if(currentHour < 15) {
             startIndex = 1
-            lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString()+ ` (${data.list[39].dt_txt.split(' ')[1]})`;
+            lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat)+ ` (${data.list[39].dt_txt.split(' ')[1]})`;
             lastForecastTemp.textContent = Math.round(data.list[39].main.temp) + '°C';
         }
         else {
-            lastForecastDate.textContent = new Date(filteredData[4].dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
+            lastForecastDate.textContent = new Date(filteredData[4].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat);
             lastForecastTemp.textContent = Math.round(filteredData[4].main.temp) + '°C';
         }
 
         filteredData.slice(startIndex).forEach((item, index) =>{
-            const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString();
+            const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat);
             forecastDates[index].textContent = forecastDate;
             forecastTemp[index].textContent = Math.round(item.main.temp) + '°C';
         })
@@ -135,7 +137,3 @@ function updateForecast(city) {
 }
 
 updateForecast(city);
-
-// let today = new Date();
-// console.log(today.toLocaleDateString("en-US"));
-// console.log(today.toLocaleDateString("en-GB"));
