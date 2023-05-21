@@ -23,16 +23,22 @@ const lastForecastTemp = document.querySelector('.last-weather-temperature');
 // for change format button
 const timeFormatBtn = document.getElementById('time-format-btn');
 const timeFormatDisplay = document.getElementById('date-time');
+const dateFormatBtn = document.getElementById('date-format-btn');
 
 let timeFormat = '24h';
+let dateFormat = 'en-GB';
 
 function toggleTimeFormat(){
     timeFormat = timeFormat === '24h' ? '12h' : '24h';
 }
+function toggleDateFormat(){
+    dateFormat = dateFormat === 'en-GB' ? 'en-US' : 'en-GB';
+    updateDateTime();
+}
 
 function updateDateTime() {
     const today = new Date();
-    let hours = today.getHours() + 4;
+    let hours = today.getHours();
     let minutes = today.getMinutes();
     let seconds = today.getSeconds();
 
@@ -50,7 +56,7 @@ function updateDateTime() {
         timeFormatDisplay.textContent = `Time: ${addZeros(hours)}:${addZeros(minutes)}:${addZeros(seconds)}`
     }
 
-    const date = today.toLocaleDateString();
+    const date = today.toLocaleDateString(dateFormat);
     timeFormatDisplay.innerHTML = `Date: ${date} <br> ${timeFormatDisplay.textContent}`;
 }
 
@@ -58,6 +64,7 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 
 timeFormatBtn.addEventListener('click', toggleTimeFormat);
+dateFormatBtn.addEventListener('click', toggleDateFormat);
 
 function addZeros(value){
     return value.toString().padStart(2, '0');
@@ -128,3 +135,7 @@ function updateForecast(city) {
 }
 
 updateForecast(city);
+
+// let today = new Date();
+// console.log(today.toLocaleDateString("en-US"));
+// console.log(today.toLocaleDateString("en-GB"));
