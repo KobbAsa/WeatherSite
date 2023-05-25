@@ -99,6 +99,13 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+.temp-toggle-btn {
+    position: relative;
+    top: 100px;
+    left: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
 .weather-icon img{
     width: 200px;
     height: 150px;

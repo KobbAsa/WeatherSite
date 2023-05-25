@@ -136,7 +136,7 @@ function updateForecast(city) {
             const weatherIconUrl = `https://openweathermap.org/img/w/${weatherCode}.png`;
             const weatherIcon = document.getElementById('icon' + (index + 1));
 
-            console.log(weatherIcon)
+            console.log(weatherIcon);
 
             weatherIcon.src = weatherIconUrl;
 
