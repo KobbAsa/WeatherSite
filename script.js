@@ -29,6 +29,14 @@ const dateFormatBtn = document.getElementById('date-format-btn');
 let timeFormat = '24h';
 let dateFormat = 'en-GB';
 
+searchButton.addEventListener('click', () => {
+    city = searchBar.value.trim();
+    if(city !== ``){
+        updateCurrentWeather(city);
+        updateForecast(city);
+    }
+});
+
 function toggleTimeFormat(){
     timeFormat = timeFormat === '24h' ? '12h' : '24h';
     updateDateTime();
@@ -101,14 +109,6 @@ function updateCurrentWeather(city) {
 }
 
 updateCurrentWeather(city);
-
-searchButton.addEventListener('click', () => {
-    const updatedCity = searchBar.value.trim();
-    if(updatedCity !== ``){
-        updateCurrentWeather(updatedCity);
-        updateForecast(updatedCity);
-    }
-});
 
 function updateForecast(city) {
     getWeatherData(city).then(data => {
