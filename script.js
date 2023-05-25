@@ -25,6 +25,7 @@ const timeFormatBtn = document.getElementById('time-format-btn');
 const timeFormatDisplay = document.getElementById('date-time');
 const dateFormatBtn = document.getElementById('date-format-btn');
 
+// format variables
 let timeFormat = '24h';
 let dateFormat = 'en-GB';
 
@@ -122,6 +123,7 @@ function updateForecast(city) {
             startIndex = 1
             lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat)+ ` (${data.list[39].dt_txt.split(' ')[1]})`;
             lastForecastTemp.textContent = Math.round(data.list[39].main.temp) + '°C';
+            document.getElementById('icon5').src = `https://openweathermap.org/img/w/${data.list[39].weather[0].icon}.png`
         }
         else {
             lastForecastDate.textContent = new Date(filteredData[4].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat);
@@ -130,6 +132,14 @@ function updateForecast(city) {
 
         filteredData.slice(startIndex).forEach((item, index) =>{
             const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat);
+            const weatherCode = filteredData[index].weather[0].icon;
+            const weatherIconUrl = `https://openweathermap.org/img/w/${weatherCode}.png`;
+            const weatherIcon = document.getElementById('icon' + (index + 1));
+
+            console.log(weatherIcon)
+
+            weatherIcon.src = weatherIconUrl;
+
             forecastDates[index].textContent = forecastDate;
             forecastTemp[index].textContent = Math.round(item.main.temp) + '°C';
         })
