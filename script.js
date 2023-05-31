@@ -17,6 +17,9 @@ const sunset = document.querySelector('.weather-value-sunset');
 // five-day forecast block
 const forecastDates = document.querySelectorAll('.weather-date');
 const forecastTemp = document.querySelectorAll('.weather-temperature');
+const forecastDescription = document.querySelectorAll('.weather-additional-info');
+
+const lastForecastDesc = document.querySelector('.last-weather-additional-info');
 const lastForecastDate = document.querySelector('.last-weather-date');
 const lastForecastTemp = document.querySelector('.last-weather-temperature');
 
@@ -134,10 +137,12 @@ function updateForecast(city) {
             lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat)+ ` (${data.list[39].dt_txt.split(' ')[1]})`;
             lastForecastTemp.textContent = Math.round(data.list[39].main.temp) + temperatureSymbol;
             document.getElementById('icon5').src = `https://openweathermap.org/img/w/${data.list[39].weather[0].icon}.png`
+            lastForecastDesc.textContent = data.list[39].weather[0].description;
         }
         else {
             lastForecastDate.textContent = new Date(filteredData[4].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat);
             lastForecastTemp.textContent = Math.round(filteredData[4].main.temp) + temperatureSymbol;
+            lastForecastDesc.textContent = filteredData[4].weather[0].description;
         }
 
         filteredData.slice(startIndex).forEach((item, index) =>{
@@ -150,6 +155,7 @@ function updateForecast(city) {
 
             forecastDates[index].textContent = forecastDate;
             forecastTemp[index].textContent = Math.round(item.main.temp) + temperatureSymbol;
+            forecastDescription[index].textContent = filteredData[index].weather[0].description;
         })
     })
 }
