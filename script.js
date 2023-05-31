@@ -30,7 +30,7 @@ const dateFormatBtn = document.getElementById('date-format-btn');
 const toggleTempBtn = document.getElementById('temp-toggle-btn');
 
 // format variables
-let timeFormat = '24h';
+let timeFormat = 'en-GB';
 let dateFormat = 'en-GB';
 let temperatureUnit = 'metric';
 searchButton.addEventListener('click', () => {
@@ -42,7 +42,7 @@ searchButton.addEventListener('click', () => {
 });
 
 function toggleTimeFormat(){
-    timeFormat = timeFormat === '24h' ? '12h' : '24h';
+    timeFormat = timeFormat === 'en-GB' ? 'en-US' : 'en-GB';
     updateDateTime();
 }
 function toggleDateFormat(){
@@ -59,23 +59,9 @@ function toggleTemperatureUnit() {
 
 function updateDateTime() {
     const today = new Date();
-    let hours = today.getHours();
-    let minutes = today.getMinutes();
-    let seconds = today.getSeconds();
 
-    if (timeFormat === '12h'){
-        let midday = 'AM';
-    if(hours >= 12){
-        midday = 'PM';
-        hours -= 12;
-    }
-    if (hours === 0){
-        hours = 12;
-    }
-        timeFormatDisplay.textContent = `Time: ${hours}:${addZeros(minutes)}:${addZeros(seconds)} ${midday}`;
-    } else {
-        timeFormatDisplay.textContent = `Time: ${addZeros(hours)}:${addZeros(minutes)}:${addZeros(seconds)}`
-    }
+    const time = new Date(Date.now()).toLocaleTimeString(timeFormat);
+    timeFormatDisplay.textContent = `Time: ${time}`;
 
     const date = today.toLocaleDateString(dateFormat);
     timeFormatDisplay.innerHTML = `Date: ${date} <br> ${timeFormatDisplay.textContent}`;
