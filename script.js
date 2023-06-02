@@ -1,13 +1,13 @@
 const apiKey = '143a2fc2324eda5597969126343ac407';
 let city = 'Kyiv';
 
-const coord = document.getElementById('coordinates');
 // basic search
 const currentCityName = document.querySelector('.current-city-name');
 const currentTemperature = document.querySelector('.current-temperature');
 const description = document.querySelector('.description');
 const searchBar = document.querySelector('.search-bar');
 const searchButton = document.getElementById('search-btn');
+const coord = document.getElementById('coordinates');
 
 // current info block
 const wind = document.querySelector('.weather-value-wind');
@@ -156,7 +156,7 @@ function updateForecast(city) {
             const forecastDate = new Date(item.dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat);
             const weatherCode = filteredData[index].weather[0].icon;
             const weatherIconUrl = `https://openweathermap.org/img/w/${weatherCode}.png`;
-            const weatherIcon = document.getElementById('icon' + (index + 1));
+            const weatherIcon = document.getElementById('icon' + index);
 
             weatherIcon.src = weatherIconUrl;
 
