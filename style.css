@@ -110,3 +110,8 @@
     width: 200px;
     height: 150px;
 }
+.coords{
+    position: absolute;
+    top: 5%;
+    right: 50px;
+}
