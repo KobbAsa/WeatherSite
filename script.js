@@ -1,5 +1,7 @@
 const apiKey = '143a2fc2324eda5597969126343ac407';
 let city = 'Kyiv';
+
+const coord = document.getElementById('coordinates');
 // basic search
 const currentCityName = document.querySelector('.current-city-name');
 const currentTemperature = document.querySelector('.current-temperature');
@@ -38,6 +40,16 @@ searchButton.addEventListener('click', () => {
     if(city !== ``){
         updateCurrentWeather(city);
         updateForecast(city);
+    }
+});
+
+searchBar.addEventListener('keydown', (event) => {
+    if(event.keyCode === 13){
+        city = searchBar.value.trim();
+        if(city !== ``){
+            updateCurrentWeather(city);
+            updateForecast(city);
+        }
     }
 });
 
@@ -93,7 +105,8 @@ function updateCurrentWeather(city) {
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
     getWeatherData(city).then(data => {
         console.log(data);
-        currentCityName.textContent = data.city.name;
+        coord.innerHTML = `Latitude: ${data.city.coord.lat}<br>Longitude: ${data.city.coord.lon}`;
+        currentCityName.textContent = `${data.city.name}, ${data.city.country}`;
         currentTemperature.textContent = Math.round(data.list[0].main.temp) + temperatureSymbol;
         description.textContent = data.list[0].weather[0].description;
         wind.textContent = data.list[0].wind.speed + ' m/s';
