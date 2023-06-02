@@ -44,6 +44,7 @@ searchButton.addEventListener('click', () => {
 function toggleTimeFormat(){
     timeFormat = timeFormat === 'en-GB' ? 'en-US' : 'en-GB';
     updateDateTime();
+    updateCurrentWeather(city);
 }
 function toggleDateFormat(){
     dateFormat = dateFormat === 'en-GB' ? 'en-US' : 'en-GB';
@@ -91,15 +92,22 @@ async function getWeatherData(city){
 function updateCurrentWeather(city) {
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
     getWeatherData(city).then(data => {
-        console.log(data)
+        console.log(data);
         currentCityName.textContent = data.city.name;
         currentTemperature.textContent = Math.round(data.list[0].main.temp) + temperatureSymbol;
         description.textContent = data.list[0].weather[0].description;
         wind.textContent = data.list[0].wind.speed + ' m/s';
         humidity.textContent = data.list[0].main.humidity + ' %';
         pressure.textContent = data.list[0].main.pressure + ' hPa';
-        sunrise.textContent = new Date(data.city.sunrise * 1000 + data.city.timezone * 1000).toLocaleTimeString();
-        sunset.textContent = new Date(data.city.sunset * 1000 + data.city.timezone * 1000).toLocaleTimeString();
+
+        const timezoneOffset = new Date().getTimezoneOffset();
+
+        const sunriseTime = new Date((data.city.sunrise + timezoneOffset * 60 + data.city.timezone) * 1000);
+        const sunsetTime = new Date((data.city.sunset + timezoneOffset * 60 + data.city.timezone) * 1000);
+
+        sunrise.textContent = sunriseTime.toLocaleTimeString(timeFormat);
+        sunset.textContent = sunsetTime.toLocaleTimeString(timeFormat);
+
     }).catch(error => {
         console.log(error);
         alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
