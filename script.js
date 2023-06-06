@@ -222,8 +222,22 @@ clearFavsBtn.addEventListener('click', () => {
 
 displayFavorites();
 
-
 function toggleFeedback() {
     const feedbackForm = document.querySelector('.feedback-form');
     feedbackForm.style.display = feedbackForm.style.display === 'none' ? 'block' : 'none';
+}
+
+function sendFeedback(){
+    const userName = document.getElementById('name-input');
+    const userComment = document.getElementById('comment-input');
+
+    const name = userName.value.trim();
+    const comment = userComment.value.trim();
+
+    if(name === '' || comment === ''){
+        alert('If you want to send feedback please fill all fields!')
+    }
+
+    userName.value = '';
+    userComment.value = '';
 }
