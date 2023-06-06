@@ -221,3 +221,9 @@ clearFavsBtn.addEventListener('click', () => {
 })
 
 displayFavorites();
+
+
+function toggleFeedback() {
+    const feedbackForm = document.querySelector('.feedback-form');
+    feedbackForm.style.display = feedbackForm.style.display === 'none' ? 'block' : 'none';
+}
