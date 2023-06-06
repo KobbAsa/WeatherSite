@@ -41,12 +41,14 @@ const favoritesList = document.getElementById('favorites-list');
 const addToFavsBtn = document.getElementById('add-to-favs-btn');
 const clearFavsBtn = document.getElementById('clear-favorites-btn');
 
+let selectedCity = city;
 searchButton.addEventListener('click', () => {
     city = searchBar.value.trim();
     if(city !== ``){
         updateCurrentWeather(city);
         updateForecast(city);
     }
+    searchBar.value = '';
 });
 
 searchBar.addEventListener('keydown', (event) => {
@@ -59,22 +61,26 @@ searchBar.addEventListener('keydown', (event) => {
     }
 });
 
-function toggleTimeFormat(){
+function toggleTimeFormat() {
     timeFormat = timeFormat === 'en-GB' ? 'en-US' : 'en-GB';
     updateDateTime();
-    updateCurrentWeather(city);
+    updateCurrentWeather(selectedCity);
+    updateForecast(selectedCity);
 }
-function toggleDateFormat(){
+
+function toggleDateFormat() {
     dateFormat = dateFormat === 'en-GB' ? 'en-US' : 'en-GB';
     updateDateTime();
-    updateForecast(city);
+    updateCurrentWeather(selectedCity);
+    updateForecast(selectedCity);
 }
 
 function toggleTemperatureUnit() {
     temperatureUnit = temperatureUnit === 'metric' ? 'imperial' : 'metric';
-    updateCurrentWeather(city);
-    updateForecast(city);
+    updateCurrentWeather(selectedCity);
+    updateForecast(selectedCity);
 }
+
 
 function updateDateTime() {
     const today = new Date();
@@ -108,6 +114,7 @@ async function getWeatherData(city){
 }
 
 function updateCurrentWeather(city) {
+    selectedCity = city;
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
     getWeatherData(city).then(data => {
         console.log(data);
@@ -136,6 +143,7 @@ function updateCurrentWeather(city) {
 updateCurrentWeather(city);
 
 function updateForecast(city) {
+    selectedCity = city;
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
     getWeatherData(city).then(data => {
         const filteredData = data.list.filter(item => item.dt_txt.includes('12:00:00'));
@@ -187,9 +195,9 @@ function displayFavorites(){
         const listItem = document.createElement('li');
         listItem.textContent = city;
         listItem.addEventListener('click', () => {
-            city = listItem.textContent;
-            updateCurrentWeather(city);
-            updateForecast(city);
+            selectedCity = listItem.textContent;
+            updateCurrentWeather(selectedCity);
+            updateForecast(selectedCity);
         });
         favoritesList.appendChild(listItem);
     });
