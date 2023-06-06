@@ -174,3 +174,35 @@ function updateForecast(city) {
 }
 
 updateForecast(city);
+
+let favorites = JSON.parse(localStorage.getItem('favoriteCities') || []);
+
+function saveFavorites(){
+    localStorage.setItem('favoriteCities', JSON.stringify(favorites));
+}
+
+function displayFavorites(){
+    favoritesList.innerHTML = '';
+    favorites.forEach((city) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = city;
+        listItem.addEventListener('click', () => {
+            city = listItem.textContent;
+            updateCurrentWeather(city);
+            updateForecast(city);
+        });
+        favoritesList.appendChild(listItem);
+    });
+}
+
+function addToFavorites(){
+    if(!favorites.includes(city)){
+        favorites.push(city);
+        saveFavorites();
+        displayFavorites();
+    }
+}
+
+addToFavsBtn.addEventListener('click', addToFavorites);
+
+displayFavorites();
