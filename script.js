@@ -53,7 +53,7 @@ searchButton.addEventListener('click', () => {
 });
 
 searchBar.addEventListener('keydown', (event) => {
-    if(event.keyCode === 13){
+    if(event.key === 'Enter'){
         city = searchBar.value.trim();
         if(city !== ``){
             updateCurrentWeather(city);
@@ -227,6 +227,7 @@ function toggleFeedback() {
     feedbackForm.style.display = feedbackForm.style.display === 'none' ? 'block' : 'none';
 }
 
+const userComment = document.getElementById('comment-input');
 function sendFeedback(){
     const userName = document.getElementById('name-input');
     const userComment = document.getElementById('comment-input');
@@ -254,3 +255,9 @@ function sendFeedback(){
 
     alert('Thank you for your feedback!')
 }
+
+userComment.addEventListener('keydown', (event) => {
+    if(event.key === 'Enter'){
+        sendFeedback();
+    }
+});
