@@ -205,4 +205,10 @@ function addToFavorites(){
 
 addToFavsBtn.addEventListener('click', addToFavorites);
 
+clearFavsBtn.addEventListener('click', () => {
+    favorites = [];
+    saveFavorites();
+    displayFavorites();
+})
+
 displayFavorites();
