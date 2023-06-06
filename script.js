@@ -184,7 +184,7 @@ function updateForecast(city) {
 
 updateForecast(city);
 
-let favorites = JSON.parse(localStorage.getItem('favoriteCities') || []);
+let favorites = JSON.parse(localStorage.getItem('favoriteCities')) || [];
 
 function saveFavorites(){
     localStorage.setItem('favoriteCities', JSON.stringify(favorites));
@@ -230,7 +230,6 @@ function toggleFeedback() {
 const userComment = document.getElementById('comment-input');
 function sendFeedback(){
     const userName = document.getElementById('name-input');
-    const userComment = document.getElementById('comment-input');
 
     const name = userName.value.trim();
     const comment = userComment.value.trim();
@@ -243,12 +242,17 @@ function sendFeedback(){
     const feedback = {
         name: name,
         comment: comment,
-        timestamp: new Date().toISOString()
     };
 
     let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
     feedbacks.push(feedback);
     localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+    feedbacks.forEach((feedback, index) => {
+        console.log(`Feedback ${index+1}:`);
+        console.log(`Name: ${feedback.name}`);
+        console.log(`Comment: ${feedback.comment}`);
+    });
 
     userName.value = '';
     userComment.value = '';
