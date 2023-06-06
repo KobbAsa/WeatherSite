@@ -118,16 +118,16 @@
 .favorites {
     width: 25%;
     position: fixed;
-    top: 25%;
+    top: 20%;
     right: 0;
     padding: 10px;
     box-sizing: border-box;
-    max-height: 300px;
+    max-height: 350px;
     overflow-y: auto;
 }
 .favorites h2 {
     position: fixed;
-    top: 20%;
+    top: 16%;
     text-align: center;
 }
 #add-to-favs-btn {
@@ -142,5 +142,56 @@ li{
 #clear-favorites-btn{
     position: fixed;
     right: 13%;
-    top: 22%;
+    top: 18.5%;
+}
+
+.feedback-container {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: #f1f1f1;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.feedback-button {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%);
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.feedback-form {
+    display: none;
+}
+
+.feedback-form h2 {
+    text-align: center;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.feedback-form button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.feedback-form button:hover {
+    background-color: #45a049;
 }
