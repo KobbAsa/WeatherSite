@@ -44,6 +44,7 @@ const clearFavsBtn = document.getElementById('clear-favorites-btn');
 let selectedCity = city;
 searchButton.addEventListener('click', () => {
     city = searchBar.value.trim();
+    city = city.charAt(0).toUpperCase() + city.slice(1);
     if(city !== ``){
         updateCurrentWeather(city);
         updateForecast(city);
