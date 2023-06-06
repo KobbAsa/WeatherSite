@@ -235,9 +235,22 @@ function sendFeedback(){
     const comment = userComment.value.trim();
 
     if(name === '' || comment === ''){
-        alert('If you want to send feedback please fill all fields!')
+        alert('If you want to send feedback please fill all fields!');
+        return;
     }
+
+    const feedback = {
+        name: name,
+        comment: comment,
+        timestamp: new Date().toISOString()
+    };
+
+    let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+    feedbacks.push(feedback);
+    localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
 
     userName.value = '';
     userComment.value = '';
+
+    alert('Thank you for your feedback!')
 }
