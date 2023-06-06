@@ -143,7 +143,7 @@ function updateForecast(city) {
             startIndex = 1
             lastForecastDate.textContent = new Date(data.list[39].dt * 1000 + data.city.timezone * 1000).toLocaleDateString(dateFormat)+ ` (${data.list[39].dt_txt.split(' ')[1]})`;
             lastForecastTemp.textContent = Math.round(data.list[39].main.temp) + temperatureSymbol;
-            document.getElementById('icon5').src = `https://openweathermap.org/img/w/${data.list[39].weather[0].icon}.png`
+            document.getElementById('icon4').src = `https://openweathermap.org/img/w/${data.list[39].weather[0].icon}.png`;
             lastForecastDesc.textContent = data.list[39].weather[0].description;
         }
         else {

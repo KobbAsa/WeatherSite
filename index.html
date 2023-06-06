@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id = "date-time" class="datetime"></div>
-<div id = "coordinates" class="coords "></div>
+<div id = "coordinates" class="coords"></div>
 <button id = "time-format-btn" class="time-format-btn"> Change time format</button>
 <button id = "date-format-btn" class="date-format-btn"> Change date format</button>
 <button id = "temp-toggle-btn" class="temp-toggle-btn"> Change temperature type</button>
@@ -23,6 +23,7 @@
     <div class = "current-weather-info">
         <span class = "current-temperature">23&deg;</span>
         <span class = "description">Cloudy</span>
+        <button id="add-to-favs-btn">*</button>
     </div>
 </div>
 
@@ -33,6 +34,16 @@
     <span class = "weather-item">Sunrise: <span class="weather-value-sunrise"></span></span>
     <span class = "weather-item">Sunset: <span class="weather-value-sunset"></span></span>
 </div>
+
+<div class="favorites">
+    <h2>Favourite cities</h2>
+    <div class="favorite-cities">
+        <ul id="favorites-list">
+            <!-- space for favs cities -->
+        </ul>
+    </div>
+</div>
+
 
 <div class = "five-day-forecast">
     <div class = "day-forecast">

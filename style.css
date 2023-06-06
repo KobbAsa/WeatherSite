@@ -115,3 +115,24 @@
     top: 5%;
     right: 50px;
 }
+.favorites {
+    width: 25%; /* you can adjust this to fit your design */
+    position: fixed;
+    top: 20%;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 10px;
+    box-sizing: border-box;
+}
+.favorites h2 {
+    text-align: center;
+}
+#add-to-favs-btn {
+    position: fixed;
+    left: 55%;
+    top: 40%;
+}
+li{
+    cursor: pointer;
+    padding: 5px;
+}
