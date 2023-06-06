@@ -37,8 +37,9 @@ let dateFormat = 'en-GB';
 let temperatureUnit = 'metric';
 
 // fav list
-const favouritesList = document.querySelector('.favorite-cities');
-const addToFavBtn = document.getElementById('add-to-favs-btn');
+const favoritesList = document.getElementById('favorites-list');
+const addToFavsBtn = document.getElementById('add-to-favs-btn');
+const clearFavsBtn = document.getElementById('clear-favorites-btn');
 
 searchButton.addEventListener('click', () => {
     city = searchBar.value.trim();
