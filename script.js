@@ -35,6 +35,11 @@ const toggleTempBtn = document.getElementById('temp-toggle-btn');
 let timeFormat = 'en-GB';
 let dateFormat = 'en-GB';
 let temperatureUnit = 'metric';
+
+// fav list
+const favouritesList = document.querySelector('.favorite-cities');
+const addToFavBtn = document.getElementById('add-to-favs-btn');
+
 searchButton.addEventListener('click', () => {
     city = searchBar.value.trim();
     if(city !== ``){
