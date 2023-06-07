@@ -149,7 +149,6 @@ async function fetchWeatherData(city) {
         throw new Error(`HTTP error! ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -207,7 +206,6 @@ function updateForecast(city) {
         const filteredData = data.list.filter((item) =>
             item.dt_txt.includes("12:00:00")
         );
-        console.log(filteredData);
 
         const now = new Date();
         let currentHour = now.getHours();
@@ -362,7 +360,6 @@ async function getAirQualityData(lat, lon) {
         throw new Error(`HTTP error! ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
