@@ -15,6 +15,7 @@ const humidity = document.querySelector('.weather-value-humidity');
 const pressure = document.querySelector('.weather-value-pressure');
 const sunrise = document.querySelector('.weather-value-sunrise');
 const sunset = document.querySelector('.weather-value-sunset');
+const airQuality = document.querySelector('.weather-value-airQuality')
 
 // five-day forecast block
 const forecastDates = document.querySelectorAll('.weather-date');
@@ -48,7 +49,6 @@ searchButton.addEventListener('click', () => {
     if(city !== ``){
         updateCurrentWeather(city);
         updateForecast(city);
-        updateAirQuality(city);
     }
     searchBar.value = '';
 });
@@ -59,7 +59,6 @@ searchBar.addEventListener('keydown', (event) => {
         if(city !== ``){
             updateCurrentWeather(city);
             updateForecast(city);
-            updateAirQuality(city);
         }
     }
 });
@@ -121,8 +120,10 @@ function updateCurrentWeather(city) {
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
     getWeatherData(city).then(data => {
         console.log(data);
+
         const lat = data.city.coord.lat;
         const lon = data.city.coord.lon;
+
         coord.innerHTML = `Latitude: ${lat}<br>Longitude: ${lon}`;
         currentCityName.textContent = `${data.city.name}, ${data.city.country}`;
         currentTemperature.textContent = Math.round(data.list[0].main.temp) + temperatureSymbol;
@@ -139,7 +140,7 @@ function updateCurrentWeather(city) {
         sunrise.textContent = sunriseTime.toLocaleTimeString(timeFormat);
         sunset.textContent = sunsetTime.toLocaleTimeString(timeFormat);
 
-        getAirQualityData(lat, lon);
+        updateAirQuality(lat, lon);
     }).catch(error => {
         console.log(error);
         alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
@@ -280,4 +281,12 @@ async function getAirQualityData(lat, lon) {
     const data = await response.json();
     console.log(data);
     return data;
+}
+
+function updateAirQuality(lat, lon){
+    getAirQualityData(lat, lon).then(data => {
+        airQuality.textContent = data.list[0].main.aqi;
+    }).catch(error =>{
+        console.log(error);
+    })
 }
