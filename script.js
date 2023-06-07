@@ -158,6 +158,7 @@ function displayWeatherData(data, city) {
 function handleFetchError(error) {
     console.log(error);
     alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
+    city = '';
 }
 
 function updateCurrentWeather(city) {
@@ -229,11 +230,16 @@ function displayFavorites(){
     });
 }
 
-function addToFavorites(){
-    if(!favorites.includes(city)){
-        favorites.push(city);
-        saveFavorites();
-        displayFavorites();
+async function addToFavorites(){
+    try {
+        await fetchWeatherData(city);
+        if(!favorites.includes(city)){
+            favorites.push(city);
+            saveFavorites();
+            displayFavorites();
+        }
+    } catch (error) {
+        console.error('Cannot add non-existing city!');
     }
 }
 
@@ -293,7 +299,6 @@ function sendFeedback(){
 
     alert('Thank you for your feedback!')
 }
-
 
 userComment.addEventListener('keydown', (event) => {
     if(event.key === 'Enter'){
