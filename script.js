@@ -283,9 +283,19 @@ async function getAirQualityData(lat, lon) {
     return data;
 }
 
+const airQualityLevels = {
+    1: {description: 'Good', color: "#003300"},
+    2: {description: 'Fair', color: "#CCCC00"},
+    3: {description: 'Moderate', color: "#CC6600"},
+    4: {description: 'Poor', color: "#990000"},
+    5: {description: 'Very Poor', color: "#660000"}
+}
+
 function updateAirQuality(lat, lon){
     getAirQualityData(lat, lon).then(data => {
-        airQuality.textContent = data.list[0].main.aqi;
+        let aqi = data.list[0].main.aqi;
+        airQuality.textContent = airQualityLevels[aqi].description;
+        airQuality.style.color = airQualityLevels[aqi].color;
     }).catch(error =>{
         console.log(error);
     })
