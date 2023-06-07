@@ -70,6 +70,7 @@ searchBar.addEventListener("keydown", (event) => {
             updateCurrentWeather(city);
             updateForecast(city);
         }
+        searchBar.value = "";
     }
 });
 
@@ -132,6 +133,7 @@ async function fetchWeatherData(city) {
         throw new Error(`HTTP error! ${response.status}`);
     }
     const data = await response.json();
+    console.log(data);
     return data;
 }
 
@@ -281,8 +283,9 @@ clearFavsBtn.addEventListener("click", () => {
 
 displayFavorites();
 
+const feedbackForm = document.querySelector(".feedback-form");
+
 function toggleFeedback() {
-    const feedbackForm = document.querySelector(".feedback-form");
     feedbackForm.style.display =
         feedbackForm.style.display === "none" ? "block" : "none";
 }
@@ -327,6 +330,7 @@ function sendFeedback() {
     userComment.value = "";
 
     alert("Thank you for your feedback!");
+    feedbackForm.style.display = "none";
 }
 
 userComment.addEventListener("keydown", (event) => {
