@@ -120,36 +120,50 @@ async function getWeatherData(city){
     return data;
 }
 
-function updateCurrentWeather(city) {
+async function fetchWeatherData(city) {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${temperatureUnit}&appid=${apiKey}`;
+    const response = await fetch(apiUrl);
+    if(!response.ok){
+        throw new Error(`HTTP error! ${response.status}`)
+    }
+    const data = await response.json();
+    return data;
+}
+
+function displayWeatherData(data, city) {
     selectedCity = city;
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
-    getWeatherData(city).then(data => {
-        console.log(data);
 
-        const lat = data.city.coord.lat;
-        const lon = data.city.coord.lon;
+    const lat = data.city.coord.lat;
+    const lon = data.city.coord.lon;
 
-        coord.innerHTML = `Latitude: ${lat}<br>Longitude: ${lon}`;
-        currentCityName.textContent = `${data.city.name}, ${data.city.country}`;
-        currentTemperature.textContent = Math.round(data.list[0].main.temp) + temperatureSymbol;
-        description.textContent = data.list[0].weather[0].description;
-        wind.textContent = data.list[0].wind.speed + ' m/s';
-        humidity.textContent = data.list[0].main.humidity + ' %';
-        pressure.textContent = data.list[0].main.pressure + ' hPa';
+    coord.innerHTML = `Latitude: ${lat}<br>Longitude: ${lon}`;
+    currentCityName.textContent = `${data.city.name}, ${data.city.country}`;
+    currentTemperature.textContent = Math.round(data.list[0].main.temp) + temperatureSymbol;
+    description.textContent = data.list[0].weather[0].description;
+    wind.textContent = data.list[0].wind.speed + ' m/s';
+    humidity.textContent = data.list[0].main.humidity + ' %';
+    pressure.textContent = data.list[0].main.pressure + ' hPa';
 
-        const timezoneOffset = new Date().getTimezoneOffset();
+    const timezoneOffset = new Date().getTimezoneOffset();
 
-        const sunriseTime = new Date((data.city.sunrise + timezoneOffset * 60 + data.city.timezone) * 1000);
-        const sunsetTime = new Date((data.city.sunset + timezoneOffset * 60 + data.city.timezone) * 1000);
+    const sunriseTime = new Date((data.city.sunrise + timezoneOffset * 60 + data.city.timezone) * 1000);
+    const sunsetTime = new Date((data.city.sunset + timezoneOffset * 60 + data.city.timezone) * 1000);
 
-        sunrise.textContent = sunriseTime.toLocaleTimeString(timeFormat);
-        sunset.textContent = sunsetTime.toLocaleTimeString(timeFormat);
+    sunrise.textContent = sunriseTime.toLocaleTimeString(timeFormat);
+    sunset.textContent = sunsetTime.toLocaleTimeString(timeFormat);
 
-        updateAirQuality(lat, lon);
-    }).catch(error => {
-        console.log(error);
-        alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
-    });
+    updateAirQuality(lat, lon);
+}
+function handleFetchError(error) {
+    console.log(error);
+    alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
+}
+
+function updateCurrentWeather(city) {
+    fetchWeatherData(city)
+        .then(data => displayWeatherData(data, city))
+        .catch(handleFetchError);
 }
 
 updateCurrentWeather(city);
