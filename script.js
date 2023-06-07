@@ -24,6 +24,7 @@ const forecastDescription = document.querySelectorAll(
     ".weather-additional-info"
 );
 
+// fifth day info
 const lastForecastDesc = document.querySelector(
     ".last-weather-additional-info"
 );
@@ -109,6 +110,7 @@ timeFormatBtn.addEventListener("click", toggleTimeFormat);
 dateFormatBtn.addEventListener("click", toggleDateFormat);
 toggleTempBtn.addEventListener("click", toggleTemperatureUnit);
 
+// I don`t use this function in code, but overall its really useful thing for date/time formatting
 function addZeros(value) {
     return value.toString().padStart(2, "0");
 }
