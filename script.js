@@ -43,9 +43,14 @@ const addToFavsBtn = document.getElementById('add-to-favs-btn');
 const clearFavsBtn = document.getElementById('clear-favorites-btn');
 
 let selectedCity = city;
-searchButton.addEventListener('click', () => {
-    city = searchBar.value.trim();
+
+function getCityName(input){
+    let city = input.value.trim();
     city = city.charAt(0).toUpperCase() + city.slice(1);
+    return city;
+}
+searchButton.addEventListener('click', () => {
+    city = getCityName(searchBar);
     if(city !== ``){
         updateCurrentWeather(city);
         updateForecast(city);
@@ -55,7 +60,7 @@ searchButton.addEventListener('click', () => {
 
 searchBar.addEventListener('keydown', (event) => {
     if(event.key === 'Enter'){
-        city = searchBar.value.trim();
+        city = getCityName(searchBar);
         if(city !== ``){
             updateCurrentWeather(city);
             updateForecast(city);
@@ -284,7 +289,7 @@ async function getAirQualityData(lat, lon) {
 }
 
 const airQualityLevels = {
-    1: {description: 'Good', color: "#003300"},
+    1: {description: 'Good', color: "#00FF00"},
     2: {description: 'Fair', color: "#CCCC00"},
     3: {description: 'Moderate', color: "#CC6600"},
     4: {description: 'Poor', color: "#990000"},
