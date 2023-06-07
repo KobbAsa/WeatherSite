@@ -127,7 +127,7 @@ setInterval(updateDateTime, 1000);
 timeFormatBtn.addEventListener("click", toggleTimeFormat);
 dateFormatBtn.addEventListener("click", toggleDateFormat);
 toggleTempBtn.addEventListener("click", toggleTemperatureUnit);
-themeBtn.addEventListener('click', toggleTheme);
+themeBtn.addEventListener("click", toggleTheme);
 
 // I don`t use this function in code, but overall its really useful thing for date/time formatting
 function addZeros(value) {
