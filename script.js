@@ -48,6 +48,7 @@ searchButton.addEventListener('click', () => {
     if(city !== ``){
         updateCurrentWeather(city);
         updateForecast(city);
+        updateAirQuality(city);
     }
     searchBar.value = '';
 });
@@ -58,6 +59,7 @@ searchBar.addEventListener('keydown', (event) => {
         if(city !== ``){
             updateCurrentWeather(city);
             updateForecast(city);
+            updateAirQuality(city);
         }
     }
 });
@@ -119,7 +121,9 @@ function updateCurrentWeather(city) {
     const temperatureSymbol = temperatureUnit === 'metric' ? '°C' : '°F';
     getWeatherData(city).then(data => {
         console.log(data);
-        coord.innerHTML = `Latitude: ${data.city.coord.lat}<br>Longitude: ${data.city.coord.lon}`;
+        const lat = data.city.coord.lat;
+        const lon = data.city.coord.lon;
+        coord.innerHTML = `Latitude: ${lat}<br>Longitude: ${lon}`;
         currentCityName.textContent = `${data.city.name}, ${data.city.country}`;
         currentTemperature.textContent = Math.round(data.list[0].main.temp) + temperatureSymbol;
         description.textContent = data.list[0].weather[0].description;
@@ -135,6 +139,7 @@ function updateCurrentWeather(city) {
         sunrise.textContent = sunriseTime.toLocaleTimeString(timeFormat);
         sunset.textContent = sunsetTime.toLocaleTimeString(timeFormat);
 
+        getAirQualityData(lat, lon);
     }).catch(error => {
         console.log(error);
         alert(`${error.name}: ${city} is not valid city name. Please enter city name again! `)
@@ -265,3 +270,14 @@ userComment.addEventListener('keydown', (event) => {
         sendFeedback();
     }
 });
+
+async function getAirQualityData(lat, lon) {
+    const apiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const response = await fetch(apiUrl);
+    if(!response.ok){
+        throw new Error(`HTTP error! ${response.status}`)
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
