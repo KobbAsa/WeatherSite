@@ -48,8 +48,9 @@ const addToFavsBtn = document.getElementById("add-to-favs-btn");
 const clearFavsBtn = document.getElementById("clear-favorites-btn");
 
 //for themes
-const themeBtn = document.getElementById('theme-toggle');
-let currentTheme = 'light';
+const themeBtn = document.getElementById("theme-toggle");
+let currentTheme = "light";
+
 
 let selectedCity = city;
 
@@ -98,16 +99,17 @@ function toggleTemperatureUnit() {
     updateForecast(selectedCity);
 }
 
-function toggleTheme(){
-    const styleLink = document.getElementById('theme-style');
-    if (currentTheme === 'light') {
-        styleLink.href = 'dark.css?version=' + new Date().getTime();
-        currentTheme = 'dark';
+function toggleTheme() {
+    const styleLink = document.getElementById("theme-style");
+    if (currentTheme === "light") {
+        styleLink.href = "dark.css?version=" + new Date().getTime();
+        currentTheme = "dark";
     } else {
-        styleLink.href = 'light.css?version=' + new Date().getTime();
-        currentTheme = 'light';
+        styleLink.href = "light.css?version=" + new Date().getTime();
+        currentTheme = "light";
     }
 }
+
 
 function updateDateTime() {
     const today = new Date();
