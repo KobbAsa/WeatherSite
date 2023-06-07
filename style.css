@@ -83,6 +83,7 @@ body {
     grid-template-columns: repeat(5, 1fr);
     justify-content: space-between;
     margin-left: 60px;
+    margin-bottom: 10px;
 }
 
 .day-forecast{
@@ -144,6 +145,11 @@ button:hover {
     top: 100px;
     left: 40px;
     padding: 10px 20px;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .weather-icon img{
@@ -201,6 +207,7 @@ li{
     position: fixed;
     right: 18%;
     top: 18.7%;
+    height: 20px;
 }
 
 .feedback-container {

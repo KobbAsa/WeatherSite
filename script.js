@@ -47,6 +47,10 @@ const favoritesList = document.getElementById("favorites-list");
 const addToFavsBtn = document.getElementById("add-to-favs-btn");
 const clearFavsBtn = document.getElementById("clear-favorites-btn");
 
+//for themes
+const themeBtn = document.getElementById('theme-toggle');
+let currentTheme = 'light';
+
 let selectedCity = city;
 
 function getCityName(input) {
@@ -94,6 +98,17 @@ function toggleTemperatureUnit() {
     updateForecast(selectedCity);
 }
 
+function toggleTheme(){
+    const styleLink = document.getElementById('theme-style');
+    if (currentTheme === 'light') {
+        styleLink.href = 'modern-style.css?version=' + new Date().getTime();
+        currentTheme = 'dark';
+    } else {
+        styleLink.href = 'styles.css?version=' + new Date().getTime();
+        currentTheme = 'light';
+    }
+}
+
 function updateDateTime() {
     const today = new Date();
 
@@ -110,6 +125,7 @@ setInterval(updateDateTime, 1000);
 timeFormatBtn.addEventListener("click", toggleTimeFormat);
 dateFormatBtn.addEventListener("click", toggleDateFormat);
 toggleTempBtn.addEventListener("click", toggleTemperatureUnit);
+themeBtn.addEventListener('click', toggleTheme);
 
 // I don`t use this function in code, but overall its really useful thing for date/time formatting
 function addZeros(value) {
@@ -370,19 +386,4 @@ function updateAirQuality(lat, lon) {
         });
 }
 
-const themeBtn = document.getElementById('theme-toggle');
 
-let currentTheme = 'light';
-
-function toggleTheme(){
-    const styleLink = document.getElementById('theme-style');
-    if (currentTheme === 'light') {
-        styleLink.href = 'modern-style.css?version=' + new Date().getTime();
-        currentTheme = 'dark';
-    } else {
-        styleLink.href = 'styles.css?version=' + new Date().getTime();
-        currentTheme = 'light';
-    }
-}
-
-themeBtn.addEventListener('click', toggleTheme);
