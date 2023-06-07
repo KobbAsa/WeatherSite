@@ -259,3 +259,10 @@ li {
     background-color: royalblue;
 }
 
+#theme-toggle{
+    position: fixed;
+    right: 2%;
+    top: 10%;
+    height: 30px;
+    width: 150px;
+}

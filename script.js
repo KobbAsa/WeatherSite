@@ -369,3 +369,20 @@ function updateAirQuality(lat, lon) {
             console.log(error);
         });
 }
+
+const themeBtn = document.getElementById('theme-toggle');
+
+let currentTheme = 'light';
+
+function toggleTheme(){
+    const styleLink = document.getElementById('theme-style');
+    if (currentTheme === 'light') {
+        styleLink.href = 'modern-style.css?version=' + new Date().getTime();
+        currentTheme = 'dark';
+    } else {
+        styleLink.href = 'styles.css?version=' + new Date().getTime();
+        currentTheme = 'light';
+    }
+}
+
+themeBtn.addEventListener('click', toggleTheme);

@@ -33,7 +33,7 @@ body {
     height: 35px;
     text-align: center;
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: var(--bg-color);
     border: none;
     border-radius: 5px;
 }
@@ -223,6 +223,7 @@ li{
     border: none;
     background-color: transparent;
     cursor: pointer;
+    color: var(--primary-color);
 }
 
 .feedback-form {
@@ -253,4 +254,12 @@ li{
 
 .feedback-form button:hover {
     background-color: var(--secondary-color);
+}
+
+#theme-toggle{
+    position: fixed;
+    right: 2%;
+    top: 10%;
+    height: 30px;
+    width: 150px;
 }
