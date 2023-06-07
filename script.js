@@ -101,10 +101,10 @@ function toggleTemperatureUnit() {
 function toggleTheme(){
     const styleLink = document.getElementById('theme-style');
     if (currentTheme === 'light') {
-        styleLink.href = 'modern-style.css?version=' + new Date().getTime();
+        styleLink.href = 'dark.css?version=' + new Date().getTime();
         currentTheme = 'dark';
     } else {
-        styleLink.href = 'styles.css?version=' + new Date().getTime();
+        styleLink.href = 'light.css?version=' + new Date().getTime();
         currentTheme = 'light';
     }
 }
