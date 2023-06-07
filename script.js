@@ -253,6 +253,21 @@ function toggleFeedback() {
 }
 
 const userComment = document.getElementById('comment-input');
+function saveFeedback(feedback) {
+    let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+    feedbacks.push(feedback);
+    localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+    return feedbacks;
+}
+
+function logFeedbacks(feedbacks) {
+    feedbacks.forEach((feedback, index) => {
+        console.log(`Feedback ${index+1}:`);
+        console.log(`Name: ${feedback.name}`);
+        console.log(`Comment: ${feedback.comment}`);
+    });
+}
+
 function sendFeedback(){
     const userName = document.getElementById('name-input');
 
@@ -269,21 +284,16 @@ function sendFeedback(){
         comment: comment,
     };
 
-    let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
-    feedbacks.push(feedback);
-    localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+    let feedbacks = saveFeedback(feedback);
 
-    feedbacks.forEach((feedback, index) => {
-        console.log(`Feedback ${index+1}:`);
-        console.log(`Name: ${feedback.name}`);
-        console.log(`Comment: ${feedback.comment}`);
-    });
+    logFeedbacks(feedbacks);
 
     userName.value = '';
     userComment.value = '';
 
     alert('Thank you for your feedback!')
 }
+
 
 userComment.addEventListener('keydown', (event) => {
     if(event.key === 'Enter'){
